@@ -27,18 +27,21 @@ rownames(us_df)
 us_df$category <- rownames(us_df)
 
 # How much money was spent on personal care in 1940?
-us_df["personal care", "X1940"]
+us_df$X1940[us_df$category == "Personal Care"]
 
 # How much money was spent on Food and Tobacco in 1960?
-
+us_df$X1960[us_df$category == "Food and Tobacco"]
 
 # What was the highest expenditure category in 1960?
-
+us_df$category[us_df$X1960 == max(us_df$X1960)]
 
 # Define a function `lowest_category` that takes in a year as a parameter, and
 # returns the lowest spending category of that year
-
+lowest_category <- function(year){
+  year <- paste0("X", year)
+  return(us_df$category[us_df[, year] == min(us_df[, year])])
+}
 
 # Using your function, determine the lowest spending category of each year
 # Hint: use the `sapply()` function to apply your function to a vector of years
-
+lowest_spend <- lowest_category(1960)
